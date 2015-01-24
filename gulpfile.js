@@ -345,19 +345,19 @@ gulp.task('zip', function () {
 
 gulp.task('build', function () {
 	console.log(hintLog('-------------------------------------------------- BUILD - Development Mode'));
-	runSequence('copy', 'concat', 'watch');
+	runSequence('copy', 'concat');
 });
 
 gulp.task('build:prod', function () {
 	console.log(hintLog('-------------------------------------------------- BUILD - Production Mode'));
 	isProduction = true;
-	runSequence('copy', 'concat', 'watch');
+	runSequence('copy', 'concat');
 });
 
-gulp.task('default', ['build', 'server']);
+gulp.task('default', ['build', 'watch', 'server']);
 
 // Just in case you are too lazy to type: $ gulp --type production
-gulp.task('prod', ['build:prod', 'server']);
+gulp.task('prod', ['build:prod', 'watch', 'server']);
 
 
 
