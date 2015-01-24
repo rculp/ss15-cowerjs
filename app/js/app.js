@@ -4,10 +4,10 @@
 ==================================================================*/
 /*global angular*/
 
-var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase']);
+var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase', 'facebook']);
 
 
-app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', function ($routeProvider, $locationProvider, $httpProvider, FacebookProvider) {
 	'use strict';
 
 	$routeProvider
@@ -18,6 +18,10 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 		.when('/about', {
 			templateUrl: 'templates/about.html'
 		})
+		.when('/events', {
+			templateUrl: 'templates/events.html',
+			controller: 'EventsCtrl'
+		})
 		.otherwise({
 			redirectTo: '/home'
 		});
@@ -26,6 +30,8 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 
 	// This is required for Browser Sync to work poperly
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+	FacebookProvider.init('655413814581170');
 }]);
 
 
