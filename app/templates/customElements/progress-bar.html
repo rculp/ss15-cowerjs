@@ -22,7 +22,7 @@
             .progress_width{
                 background: {{barColor}};
                 border-radius: {{border}};
-                width: 10%;
+                width: 0%;
                 height: 100%;
                 position: absolute;
                 left: 0;
@@ -32,8 +32,8 @@
         </style>
 
         <div class="ui-progress">
-            <span class="progress_width" style="width: {{value}}"></span>
-            <span class="progress_value">{{value}}</span>
+            <span class="progress_width" style="width: {{value}}%"></span>
+            <span class="progress_value">{{value}}%</span>
         </div>
     </template>
 
@@ -54,7 +54,7 @@
         }
         Polymer('progress-bar', {
             border        : '10px',
-            value         : '20%',
+            value         : 0,
             progressColor : '#eee',
             barColor      : '#000',
             
