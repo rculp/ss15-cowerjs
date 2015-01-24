@@ -26,6 +26,7 @@ var	SETTINGS = {
 		templates: 'app/templates/',
 		images: 'app/img/',
 		fonts: 'app/fonts/',
+		vendor: 'app/vendor/',
 		bower: 'bower_components/'
 	},
 	build: {
@@ -35,6 +36,7 @@ var	SETTINGS = {
 		templates: 'build/templates/',
 		images: 'build/img/',
 		fonts: 'build/fonts/',
+		vendor: 'build/vendor/',
 		bower: 'build/bower/' // If you change this, you will have to change in index.html as well.
 	},
 	scss: 'scss/'
@@ -197,7 +199,7 @@ gulp.task('image:min', function () {
 =                           Copy                            =
 ============================================================*/
 
-gulp.task('copy', ['copy:html', 'copy:images', 'copy:fonts', 'copy:html:root']);
+gulp.task('copy', ['copy:html', 'copy:images', 'copy:fonts', 'copy:html:root', 'copy:vendor']);
 
 
 gulp.task('copy:html', function () {
@@ -230,6 +232,13 @@ gulp.task('copy:fonts', function () {
 	console.log('-------------------------------------------------- COPY :fonts');
 	gulp.src([SETTINGS.src.fonts + '*', SETTINGS.src.fonts + '**/*'])
 		.pipe(gulp.dest(SETTINGS.build.fonts));
+});
+
+gulp.task('copy:vendor', function () {
+
+	console.log('-------------------------------------------------- COPY :vendor');
+	gulp.src([SETTINGS.src.vendor + '*', SETTINGS.src.vendor + '**/*'])
+		.pipe(gulp.dest(SETTINGS.build.vendor));
 });
 
 
