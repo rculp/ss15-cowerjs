@@ -4,7 +4,7 @@
 ==================================================================*/
 /*global angular*/
 
-var app = angular.module('chipsOrSomething', ["ngRoute", "ngAnimate"]);
+var app = angular.module('chipsOrSomething', ["ngRoute", "ngAnimate", "firebase"]);
 
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
@@ -41,6 +41,7 @@ app.run(['$rootScope', function ($rootScope) {
 
 /* ---> Do not delete this comment (Values) <--- */
 
+app.constant('FirebaseURL', 'https://torid-inferno-6989.firebaseio.com');
 /* ---> Do not delete this comment (Constants) <--- */
 
 /*================================================================
