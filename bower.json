@@ -10,7 +10,8 @@
   },
   "devDependencies": {
     "angular-mocks": "*",
-    "angular-scenario": "*"
+    "angular-scenario": "*",
+    "font-awesome": "~4.3.0"
   },
   "overrides": {}
 }
