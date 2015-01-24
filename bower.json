@@ -1,0 +1,17 @@
+{
+  "name": "chips-or-something",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "*",
+    "angular-route": "*",
+    "angular-animate": "*",
+    "jquery": "*"
+  },
+  "devDependencies": {
+    "angular-mocks": "*",
+    "angular-scenario": "*"
+  },
+  "overrides": {
+
+  }
+}
