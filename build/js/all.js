@@ -15,6 +15,9 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 			templateUrl: 'templates/home.html', 
 			controller: 'HomeCtrl'
 		})
+		.when('/about', {
+			templateUrl: 'templates/about.html'
+		})
 		.otherwise({
 			redirectTo: '/home'
 		});

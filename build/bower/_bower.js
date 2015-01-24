@@ -40989,9 +40989,9 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
  * provides you with the $firebase service which allows you to easily keep your $scope
  * variables in sync with your Firebase backend.
  *
- * AngularFire 0.9.1
+ * AngularFire 0.9.2
  * https://github.com/firebase/angularfire/
- * Date: 01/08/2015
+ * Date: 01/24/2015
  * License: MIT
  */
 (function(exports) {
@@ -41816,24 +41816,28 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
      */
     _routerMethodOnAuthPromise: function(rejectIfAuthDataIsNull) {
       var ref = this._ref;
-      var deferred = this._q.defer();
 
-      function callback(authData) {
-        if (authData !== null) {
-          deferred.resolve(authData);
-        } else if (rejectIfAuthDataIsNull) {
-          deferred.reject("AUTH_REQUIRED");
-        } else {
-          deferred.resolve(null);
+      return this._utils.promise(function(resolve,reject){
+        function callback(authData) {
+          // Turn off this onAuth() callback since we just needed to get the authentication data once.
+          ref.offAuth(callback);
+
+          if (authData !== null) {
+            resolve(authData);
+            return;
+          }
+          else if (rejectIfAuthDataIsNull) {
+            reject("AUTH_REQUIRED");
+            return;
+          }
+          else {
+            resolve(null);
+            return;
+          }
         }
 
-        // Turn off this onAuth() callback since we just needed to get the authentication data once.
-        ref.offAuth(callback);
-      }
-
-      ref.onAuth(callback);
-
-      return deferred.promise;
+        ref.onAuth(callback);
+      });
     },
 
     /**
@@ -42038,7 +42042,7 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
 (function() {
   'use strict';
   /**
-   * Creates and maintains a synchronized boject. This constructor should not be
+   * Creates and maintains a synchronized object. This constructor should not be
    * manually invoked. Instead, one should create a $firebase object and call $asObject
    * on it:  <code>$firebase( firebaseRef ).$asObject()</code>;
    *
@@ -42122,7 +42126,7 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
           var self = this;
           $firebaseUtils.trimKeys(this, {});
           this.$value = null;
-          return self.$inst().$remove(self.$id).then(function(ref) {
+          return self.$inst().$remove().then(function(ref) {
             self.$$notify();
             return ref;
           });
@@ -42567,16 +42571,18 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
             }
             applyLocally = !!applyLocally;
 
-            var def = $firebaseUtils.defer();
-            ref.transaction(valueFn, function(err, committed, snap) {
-               if( err ) {
-                 def.reject(err);
-               }
-               else {
-                 def.resolve(committed? snap : null);
-               }
-            }, applyLocally);
-            return def.promise;
+            return new $firebaseUtils.promise(function(resolve,reject){
+              ref.transaction(valueFn, function(err, committed, snap) {
+                if( err ) {
+                  reject(err);
+                  return;
+                }
+                else {
+                  resolve(committed? snap : null);
+                  return;
+                }
+              }, applyLocally);
+            });
           },
 
           $asObject: function () {
@@ -42651,14 +42657,6 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
             }
           }
 
-          function assertArray(arr) {
-            if( !angular.isArray(arr) ) {
-              var type = Object.prototype.toString.call(arr);
-              throw new Error('arrayFactory must return a valid array that passes ' +
-                'angular.isArray and Array.isArray, but received "' + type + '"');
-            }
-          }
-
           var def     = $firebaseUtils.defer();
           var array   = new ArrayFactory($inst, destroy, def.promise);
           var batch   = $firebaseUtils.batch();
@@ -42695,6 +42693,9 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
               }
             }
           });
+
+          assertArray(array);
+
           var error   = batch(array.$$error, array);
           var resolve = batch(_resolveFn);
 
@@ -42702,8 +42703,15 @@ function ob(a,b){w(!b||!0===a||!1===a,"Can't turn on custom loggers persistently
           self.isDestroyed = false;
           self.getArray = function() { return array; };
 
-          assertArray(array);
           init();
+        }
+
+        function assertArray(arr) {
+          if( !angular.isArray(arr) ) {
+            var type = Object.prototype.toString.call(arr);
+            throw new Error('arrayFactory must return a valid array that passes ' +
+            'angular.isArray and Array.isArray, but received "' + type + '"');
+          }
         }
 
         function SyncObject($inst, ObjectFactory) {
@@ -42949,6 +42957,29 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
 
     .factory('$firebaseUtils', ["$q", "$timeout", "firebaseBatchDelay",
       function($q, $timeout, firebaseBatchDelay) {
+
+        // ES6 style promises polyfill for angular 1.2.x
+        // Copied from angular 1.3.x implementation: https://github.com/angular/angular.js/blob/v1.3.5/src/ng/q.js#L539
+        function Q(resolver) {
+          if (!angular.isFunction(resolver)) {
+            throw new Error('missing resolver function');
+          }
+
+          var deferred = $q.defer();
+
+          function resolveFn(value) {
+            deferred.resolve(value);
+          }
+
+          function rejectFn(reason) {
+            deferred.reject(reason);
+          }
+
+          resolver(resolveFn, rejectFn);
+
+          return deferred.promise;
+        }
+
         var utils = {
           /**
            * Returns a function which, each time it is invoked, will pause for `wait`
@@ -43144,21 +43175,14 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
             });
           },
 
-          defer: function() {
-            return $q.defer();
-          },
+          defer: $q.defer,
 
-          reject: function(msg) {
-            var def = utils.defer();
-            def.reject(msg);
-            return def.promise;
-          },
+          reject: $q.reject,
 
-          resolve: function() {
-            var def = utils.defer();
-            def.resolve.apply(def, arguments);
-            return def.promise;
-          },
+          resolve: $q.when,
+
+          //TODO: Remove false branch and use only angular implementation when we drop angular 1.2.x support.
+          promise: angular.isFunction($q) ? $q : Q,
 
           makeNodeResolver:function(deferred){
             return function(err,result){
