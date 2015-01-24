@@ -11,10 +11,10 @@
                     <hr class="intro-divider">
                     <ul class="list-inline intro-social-buttons">
                         <li>
-                            <button ng-hide-auth ng-click="auth.$authWithOAuthPopup('facebook')" class="btn btn-default btn-lg">
-                            	<i class="fa fa-facebook fa-fw"></i> 
-                            	<span class="network-name">Login With Facebook</span>
-                        	</button>
+                            <ng-login-button ng-hide-auth class="btn btn-default btn-lg">
+	                        	<i class="fa fa-facebook fa-fw"></i> 
+	                        	<span class="network-name">Login With Facebook</span>
+	                    	</ng-login-button>
                             <button ng-show-auth class="btn btn-default btn-lg">See Your Events</button>
                         </li>
                     </ul>
@@ -86,7 +86,7 @@
                 <p class="lead">Chips Or Something is designed to work with your existing Facebook Events. So log in and start planning!</p>
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="img/phones.png" alt="">
+                <img class="img-responsive" src="img/social.png" alt="">
             </div>
         </div>
 
@@ -108,11 +108,11 @@
             <div class="col-lg-6">
                 <ul class="list-inline banner-social-buttons">
                     <li>
-                            <button ng-hide-auth ng-click="auth.$authWithOAuthPopup('facebook')" class="btn btn-default btn-lg">
-                            	<i class="fa fa-facebook fa-fw"></i> 
-                            	<span class="network-name">Login With Facebook</span>
-                        	</button>
-                            <button ng-show-auth class="btn btn-default btn-lg">See Your Events</button>
+                        <ng-login-button ng-hide-auth class="btn btn-default btn-lg">
+                        	<i class="fa fa-facebook fa-fw"></i> 
+                        	<span class="network-name">Login With Facebook</span>
+                    	</ng-login-button>
+                        <button ng-show-auth class="btn btn-default btn-lg">See Your Events</button>
                     </li>
                 </ul>
             </div>

@@ -4,12 +4,9 @@
 ==================================================================*/
 /*global app*/
 
-app.controller('HeaderCtrl', ['$scope', 'Auth', function ($scope, Auth) {
+app.controller('HeaderCtrl', ['$scope', function ($scope) {
 
 	'use strict';
-
-  $scope.auth = Auth;
-  $scope.user = $scope.auth.$getAuth();
 
 	console.log('Controller ===  HeaderCtrl');
 }]);

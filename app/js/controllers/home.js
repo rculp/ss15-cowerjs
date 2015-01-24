@@ -4,12 +4,9 @@
 ==================================================================*/
 /*global app*/
 
-app.controller('HomeCtrl', ['$scope', '$location', 'Auth', function ($scope, $location, Auth) {
+app.controller('HomeCtrl', ['$scope', function ($scope) {
 
-  'use strict';
-
-  $scope.auth = Auth;
-  $scope.user = $scope.auth.$getAuth();
+	'use strict';
 
 	console.log('Controller ===  HomeCtrl');
 }]);

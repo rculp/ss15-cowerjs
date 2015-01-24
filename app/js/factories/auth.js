@@ -8,17 +8,17 @@ app.factory('Auth', ['$firebaseAuth', '$location', 'Firebase', function ($fireba
 
 	'use strict';
 
-  function authCallback(authData) {
-    if (authData) {
-      console.log("Authenticated");
-    } else {
-      console.log("Logged Out");
+    function authCallback(authData) {
+        if (authData) {
+            console.log('Authenticated');
+        } else {
+            console.log('Logged Out');
+        }
     }
-  }
 
-  Firebase.onAuth(authCallback);
+    Firebase.onAuth(authCallback);
 
-  return $firebaseAuth(Firebase);
+    return $firebaseAuth(Firebase);
 
 }]);
 
