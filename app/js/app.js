@@ -4,7 +4,7 @@
 ==================================================================*/
 /*global angular*/
 
-var app = angular.module('chipsOrSomething', ["ngRoute", "ngAnimate", "firebase"]);
+var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase']);
 
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
@@ -12,7 +12,7 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 
 	$routeProvider
 		.when('/home', {
-			templateUrl: 'templates/home.html', 
+			templateUrl: 'templates/home.html',
 			controller: 'HomeCtrl'
 		})
 		.when('/about', {
