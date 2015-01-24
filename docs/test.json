@@ -1,0 +1,138 @@
+{
+    "events": {
+        "fb4": {
+            "name": "event1",
+            "needs": [
+                {
+                    "name": "Squash",
+                    "taken": true,
+                    "person": "df040r0f"
+                },
+                {
+                    "name": "4 Loco",
+                    "taken": false,
+                    "person": null
+                }
+            ],
+            "location": {
+                "address1": "1 Place Pl",
+                "address2": "Apt. 7",
+                "city": "Des Moines",
+                "state": "Iowa",
+                "country": "USA",
+                "zip": "22250",
+                "phone": "123-4567"
+            },
+            "date": "2015-02-01T12:15:03+00:00",
+            "admins": [
+                {
+                    "name": "Sarah Silver",
+                    "id": "ajsdj93sas"
+                },
+                {
+                    "name": "José Valazquez",
+                    "id": "ai349gs"
+                },
+                {
+                    "name": "Fatima Raj",
+                    "id": "gjj330rf"
+                }
+            ],
+            "owner": {
+                "name": "Donnatella Versace",
+                "id": "e99e9d2112"
+            },
+            "attendees": [
+                {
+                    "name": "Sarah Silver",
+                    "id": "ajsdj93sas"
+                },
+                {
+                    "name": "José Valazquez",
+                    "id": "ai349gs"
+                },
+                {
+                    "name": "Fatima Raj",
+                    "id": "gjj330rf"
+                },
+                {
+                    "name": "Hurtz Donut",
+                    "id": "df040r0f"
+                },
+                {
+                    "name": "Nunya Biznez",
+                    "id": "e9e99dfd9"
+                },
+                {
+                    "name": "Donnatella Versace",
+                    "id": "e99e9d2112"
+                }
+            ]
+        }
+    },
+    "items": {
+        "food": [
+            "hamburger",
+            "poptart",
+            "popcorn",
+            "salmon",
+            "steak",
+            "lettuce",
+            "popsicle",
+            "reindeer carcus"
+        ],
+        "drink": [
+            "lemonade",
+            "4 loco",
+            "red bull",
+            "Coke",
+            "Pepsi"
+        ],
+        "games": [
+            "Settlers of Catan",
+            "Magic, the Gathering",
+            "Skippit",
+            "Boppit",
+            "Monopoly",
+            "Pictionary",
+            "Taboo"
+        ],
+        "other": [
+            "A Divorce Lawyer",
+            "Tent",
+            "Sleeping Bag",
+            "Confetti"
+        ],
+        "supplies": [
+            "frying pan",
+            "cake pan",
+            "baking tray",
+            "whisk",
+            "silverware",
+            "plates",
+            "tape"
+        ]
+    },
+    "users": {
+        "e99e9d2112": {
+            "name": "Donnatella Versace",
+            "organizer": [
+                "fb4"
+            ],
+            "attendee": [
+                "fb4",
+                "fb452"
+            ]
+        },
+        "df040r0f": {
+            "name": "Hurtz Donut",
+            "organizer": null,
+            "attendee": [
+                "fb4",
+                "fb40052",
+                "fb096",
+                "fb503"
+            ]
+        }
+    }
+}
