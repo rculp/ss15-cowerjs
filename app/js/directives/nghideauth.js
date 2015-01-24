@@ -28,7 +28,7 @@ app.directive('ngHideAuth', ['$rootScope', '$timeout', 'Firebase', function ($ro
 				// sometimes if ngCloak exists on same element, they argue, so make sure that
 				// this one always runs last for reliability
 				$timeout(function () {
-					element.toggleClass('ng-cloak', !isLoggedIn);
+					element.toggleClass('ng-cloak', isLoggedIn);
 				}, 0);
 			}
 
