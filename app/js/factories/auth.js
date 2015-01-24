@@ -4,18 +4,21 @@
 ==================================================================*/
 /*global app*/
 
-app.factory('Auth', ['$rootScope', function ($rootScope) {
+app.factory('Auth', ['$firebaseAuth', '$location', 'Firebase', function ($firebaseAuth, $location, Firebase) {
 
 	'use strict';
 
-	// You can write some code here
+  function authCallback(authData) {
+    if (authData) {
+      console.log("Authenticated");
+    } else {
+      console.log("Logged Out");
+    }
+  }
 
+  Firebase.onAuth(authCallback);
 
-	return {
-	    func : function () {
-	      
-	    }
-	};
+  return $firebaseAuth(Firebase);
 
 }]);
 

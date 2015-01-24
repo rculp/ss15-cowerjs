@@ -12,7 +12,8 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 
 	$routeProvider
 		.when('/home', {
-			templateUrl: 'templates/home.html'
+			templateUrl: 'templates/home.html', 
+			controller: 'HomeCtrl'
 		})
 		.otherwise({
 			redirectTo: '/home'
