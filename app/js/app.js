@@ -10,6 +10,8 @@ var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase'
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', function ($routeProvider, $locationProvider, $httpProvider, FacebookProvider) {
 	'use strict';
 
+	FacebookProvider.init('655413814581170');
+
 	$routeProvider
 		.when('/home', {
 			templateUrl: 'templates/home.html',
@@ -30,8 +32,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookPro
 
 	// This is required for Browser Sync to work poperly
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-	FacebookProvider.init('655413814581170');
 }]);
 
 
