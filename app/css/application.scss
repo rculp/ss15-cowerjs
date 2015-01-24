@@ -39,7 +39,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 	}
 }
 
-.navbar-toggle {
+.navbar-toggle, .navbar-btn {
 	margin-top: 13px;
 	margin-bottom: 13px;
 }
@@ -47,4 +47,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .navbar-nav > li > a {
 	padding-top: 20px;
 	padding-bottom: 20px;
+}
+
+.navbar-default .btn-link {
+	line-height: 20px;
+	text-decoration:  none;
 }
