@@ -4,7 +4,7 @@
 
 	(The file which is not imported will not be include in final build )
 
-	CSS - All the css files will be loaded in the order they appear 
+	CSS - All the css files will be loaded in the order they appear
 		in the app/css directory
 ========================================================================*/
 
@@ -18,7 +18,7 @@
   Then uncomment the two lines below:
 */
 
-// $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/" !default;
-// @import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/" !default;
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 
 

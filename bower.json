@@ -5,13 +5,12 @@
     "angular": "*",
     "angular-route": "*",
     "angular-animate": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "bootstrap-sass-official": "~3.3.3"
   },
   "devDependencies": {
     "angular-mocks": "*",
     "angular-scenario": "*"
   },
-  "overrides": {
-
-  }
+  "overrides": {}
 }

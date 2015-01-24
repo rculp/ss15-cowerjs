@@ -1,6 +1,6 @@
 {
   "name": "ss15-cowerjs",
-  "root": "./",
+  "root": "./build/",
   "clean_urls": true,
-  "error_page": "build/error.html"
+  "error_page": "error.html"
 }
