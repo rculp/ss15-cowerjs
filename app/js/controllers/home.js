@@ -6,10 +6,10 @@
 
 app.controller('HomeCtrl', ['$scope', '$location', 'Auth', function ($scope, $location, Auth) {
 
-  'use strict';
+	'use strict';
 
-  $scope.auth = Auth;
-  $scope.user = $scope.auth.$getAuth();
+	$scope.auth = Auth;
+	$scope.user = $scope.auth.$getAuth();
 
 	console.log('Controller ===  HomeCtrl');
 }]);
