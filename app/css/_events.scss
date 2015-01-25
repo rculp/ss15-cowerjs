@@ -48,3 +48,23 @@
 .side-nav>li>ul>li>button:hover {
     color: #fff;
 }
+.fa-clock-o{
+    color: $brand-pink;
+}
+.fa-map-marker{
+    color : $brand-yellow;
+}
+.fa-user{
+    color: $brand-blue;
+}
+.data-needed-container .btn-default{
+    &:hover{
+        background-color: lighten($brand-green, 40%);
+    }
+}
+.btn-link{
+    color: $brand-blue;
+    &:hover, &:active, &:visited, &:focus{
+        color: darken($brand-blue, 7%);
+    }
+}

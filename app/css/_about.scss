@@ -1,6 +1,7 @@
 .section-header {
 	margin: 20px 0 10px;
 	border-bottom: 1px solid #eeeeee;
+    color: $brand-yellow;
 }
 
 .img-center {
@@ -10,4 +11,10 @@
 .teampic {
 	height: 150px;
 	width: 150px;
+}
+.page-header{
+    color: $brand-yellow;
+}
+h3{
+    color: $brand-pink;
 }
