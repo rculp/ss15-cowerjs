@@ -10,8 +10,8 @@ app.service('FbPostService', ['Facebook', function (Facebook) {
             {
                 'access_token': userToken,
                 'message': 'Join me on Chips Or Something!',
-                'link': 'http://development.ss15-cowerjs.divshot.io',
-                'picture': 'http://development.ss15-cowerjs.divshot.io/img/gameday.jpg',
+                'link': 'http://ss15-cowerjs.divshot.io',
+                'picture': 'http://ss15-cowerjs.divshot.io/img/gameday.jpg',
                 'description': 'Who\'s bringing what?'
             },
             function (response) {
@@ -27,8 +27,8 @@ app.service('FbPostService', ['Facebook', function (Facebook) {
             {
                 'access_token': userToken,
                 'message': 'Hey, should I bring Chips Or Something?',
-                'link': 'http://development.ss15-cowerjs.divshot.io',
-                'picture': 'http://development.ss15-cowerjs.divshot.io/img/gameday.jpg',
+                'link': 'http://ss15-cowerjs.divshot.io',
+                'picture': 'http://ss15-cowerjs.divshot.io/img/gameday.jpg',
                 'description': 'Who\'s bringing what?'
             },
             function (response) {

@@ -1,11 +1,11 @@
-app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsService', '$location', function ($scope, UserService, Facebook, EventsService, $location) {
+app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsService', '$location', 'FbPostService', function ($scope, UserService, Facebook, EventsService, $location, FbPostService) {
 	'use strict';
 
 	var _user = UserService.getCurrentUser();
 
 	$scope.selectedEvent = null;
 	$scope.organizer = '???';
-	$scope.dataSaving = false;
+	$scope.dataAdded = false;
 	$scope.loading = true;
 	$scope.eventOnlyOnFacebook = true;
 	$scope.amEventAdmin = false;
@@ -50,14 +50,6 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 		$scope.eventOnlyOnFacebook = eventOnlyOnFacebook();
 	}
 
-	$scope.addEvent = function() {
-		//upon user's permission push this data to the event service to add to firebase
-		var firebasePromise = EventsService.addToFireBase($scope.selectedEvent);
-		firebasePromise.then(function(event){
-			$location.path('/registry/' + event.id);
-		});
-	};
-
 	function eventOnlyOnFacebook() {
 		return $scope.selectedEvent == null || !$scope.selectedEvent.data;
 	};
@@ -67,13 +59,27 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 			return false;
 		}
 
-		if (eventOnlyOnFacebook()) {
+		//if (eventOnlyOnFacebook()) {
 			var validFacebookData = $scope.selectedEvent.facebook;
 			var isOwner = $scope.selectedEvent.facebook.owner.id == UserService.getCurrentUser().id
 			return validFacebookData && isOwner;
-		}
+		//}
 
-		return $scope.selectedEvent.data && $scope.selectedEvent.data.admins && $scope.selectedEvent.data.admins.indexOf(UserService.getCurrentUser().id) !== -1;
+		//return $scope.selectedEvent.data && $scope.selectedEvent.data.admins && $scope.selectedEvent.data.admins.indexOf(UserService.getCurrentUser().id) !== -1;
+	}
+
+	$scope.addEvent = function() {
+		//upon user's permission push this data to the event service to add to firebase
+		var firebasePromise = EventsService.addToFireBase($scope.selectedEvent);
+		firebasePromise.then(function(event){
+			FbPostService.postCOSlink(UserService.getCurrentUser().accessToken, 'host', $scope.selectedEvent.id);
+			$location.path('/registry/' + event.id);
+		});
+	};
+
+	$scope.requestRegistry = function () {
+		FbPostService.postCOSlink(UserService.getCurrentUser().accessToken, 'guest', $scope.selectedEvent.id);
+		$scope.dataAdded = true;
 	}
 
 }]);
