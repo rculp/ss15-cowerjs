@@ -13,7 +13,49 @@
     background: url(../img/friends-dinner-table.jpg) no-repeat center center;
     background-size: cover;
 }
-
+.navbar-default{
+    background-color: lighten($brand-blue, 40%);
+    border-color: $brand-blue;
+}
+.navbar-default .navbar-toggle{
+    border-color: $brand-blue;
+    .icon-bar{
+        background-color: $brand-blue;
+    }
+    &:hover, &:active, &:focus{
+        background-color: lighten($brand-yellow, 15%);
+    }
+}
+.navbar-default .navbar-collapse{
+    border-color: $brand-blue;
+}
+.navbar-default .topnav{
+    a
+    {
+        color: $brand-blue;
+        &:hover{
+            color: darken($brand-blue, 8%);
+        }
+    }
+    a:visited{
+        color: $brand-blue;
+        &:hover{
+            color: darken($brand-blue, 8%);
+        }
+    }
+    ng-logout-button{
+        color: $brand-blue;
+        &:hover{
+            color: darken($brand-blue, 8%);
+        }
+    
+    }
+}
+.intro-social-buttons{
+    a:hover{
+        background-color: lighten($brand-green, 40%);
+    }
+}
 .intro-message {
     position: relative;
     padding-top: 20%;
@@ -28,7 +70,7 @@
 
 .intro-divider {
     width: 400px;
-    border-top: 1px solid #f8f8f8;
+    border-top: 1px solid $brand-yellow;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
@@ -57,6 +99,7 @@
 
     .intro-divider {
         width: 100%;
+
     }
 }
 
@@ -80,6 +123,7 @@
 
 .section-heading {
     margin-bottom: 30px;
+    color: $brand-pink
 }
 
 .section-heading-spacer {
@@ -108,6 +152,9 @@
 .banner-social-buttons {
     float: right;
     margin-top: 0;
+    a:hover{
+        background-color: lighten($brand-green, 40%);
+    }
 }
 
 @media(max-width:991px) {
@@ -136,4 +183,19 @@
         width: 100%;
         margin-top: 15px;
     }
+}
+.section-heading-spacer{
+    border-top-color: $brand-yellow;
+}
+footer{
+    a{
+        color: $brand-pink;
+        &:visited{
+            color: $brand-pink;
+        }
+        &:hover{
+            color: $brand-blue;
+        }
+    }
+
 }
