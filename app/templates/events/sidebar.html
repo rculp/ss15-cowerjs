@@ -2,7 +2,7 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <h3>Events</h3>
     <button ng-click="importEvents()">Import Your Events</button>
-    <ul ng-repeat="e in events | orderBy:'start_time'" class="nav navbar-nav side-nav">
+    <ul ng-repeat="e in events" class="nav navbar-nav side-nav">
         <li>
             <button class="btn btn-link" ng-click="chooseEvent(e)">
                 <i class="fa fa-fw fa-calendar-o"></i><span>{{e.name}}</span>
