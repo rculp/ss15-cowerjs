@@ -9,6 +9,7 @@ app.controller('HomeCtrl', ['$scope', function ($scope) {
 	'use strict';
 
 	console.log('Controller ===  HomeCtrl');
+
 }]);
 
 

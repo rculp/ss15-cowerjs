@@ -1,3 +1,33 @@
+
+.need {
+	margin-bottom: 5px;
+	> * {
+		display: inline-block;
+		width: 45%;
+		text-align: left;
+	}
+}
+
+.needName {
+	display: inline-block;
+	width: 50%;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid transparent;
+	padding: 6px 12px;
+	line-height: 2;
+	border-radius: 8px;
+
+	&.unclaimed {
+		background: pink;
+	}
+
+	&.claimed {
+		background: lightgreen;
+	}
+}
+
 .chip-input{
     width: 35%;
     min-width: 120px;
