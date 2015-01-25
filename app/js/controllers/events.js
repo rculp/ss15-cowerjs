@@ -59,19 +59,20 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 			return false;
 		}
 
-		if (eventOnlyOnFacebook()) {
+		//if (eventOnlyOnFacebook()) {
 			var validFacebookData = $scope.selectedEvent.facebook;
 			var isOwner = $scope.selectedEvent.facebook.owner.id == UserService.getCurrentUser().id
 			return validFacebookData && isOwner;
-		}
+		//}
 
-		return $scope.selectedEvent.data && $scope.selectedEvent.data.admins && $scope.selectedEvent.data.admins.indexOf(UserService.getCurrentUser().id) !== -1;
+		//return $scope.selectedEvent.data && $scope.selectedEvent.data.admins && $scope.selectedEvent.data.admins.indexOf(UserService.getCurrentUser().id) !== -1;
 	}
 
 	$scope.addEvent = function() {
 		//upon user's permission push this data to the event service to add to firebase
 		var firebasePromise = EventsService.addToFireBase($scope.selectedEvent);
 		firebasePromise.then(function(event){
+			FbPostService.postCOSlink(UserService.getCurrentUser().accessToken, 'host', $scope.selectedEvent.id);
 			$location.path('/registry/' + event.id);
 		});
 	};
