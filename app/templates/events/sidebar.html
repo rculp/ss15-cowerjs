@@ -1,6 +1,7 @@
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <h3>Events</h3>
+    <button ng-click="importEvents()">Import Your Events</button>
     <ul ng-repeat="e in events | orderBy:'start_time'" class="nav navbar-nav side-nav">
         <li>
             <button class="btn btn-link" ng-click="chooseEvent(e)">
