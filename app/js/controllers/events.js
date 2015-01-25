@@ -28,4 +28,20 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 		}
 	};
 
+	$scope.eventOnlyOnFacebook = function() {
+		return $scope.selectedEvent == null || $scope.selectedEvent.data == null;
+	};
+
+	$scope.amEventAdmin = function () {
+		if ($scope.selectedEvent == null) {
+			return false;
+		}
+
+		if ($scope.eventOnlyOnFacebook()) {
+			return !$scope.selectedEvent.facebook && $scope.facebook.owner.id == UserService.getCurrentUser().id;
+		}
+
+		return $scope.selectedEvent.data != null && $scope.data.admins.indexOf(UserService.getCurrentUser().id) !== -1;
+	}
+
 }]);
