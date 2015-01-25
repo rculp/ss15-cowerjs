@@ -97,7 +97,7 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 			'/' + id + '/attending',
 			{ access_token: user.accessToken },
 			function (response) {
-				return response;
+				return response.data;
 			}
 		);
 		return $q.all({ data: firebasePromise, facebook: facebookPromise, attendees: attendeesPromise });
