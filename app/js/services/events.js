@@ -103,6 +103,22 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 		return $q.all({ data: firebasePromise, facebook: facebookPromise, attendees: attendeesPromise });
 	}
 
+	this.addNewNeeds = function (event, needs) {
+		var newNeeds = [];
+		angular.forEach(needs, function(n) {
+			needs.push({'name': n, 'person': '', 'taken': false});
+		});
+		var firebasePromise = $q(function(resolve, reject){
+			Firebase.child('events/' + event + '/needs/').push(newNeeds, function(error) {
+				if (error) {
+					reject();
+				} else {
+					resolve();
+				}
+			});
+		});
+	}
+
 }]);
 
 
