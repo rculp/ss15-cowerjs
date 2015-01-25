@@ -15,6 +15,10 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 			templateUrl: 'templates/home.html',
 			controller: 'HomeCtrl'
 		})
+		.when('/registry', {
+			templateUrl: 'templates/registry.html',
+			controller: 'RegistryCtrl'
+		})
 		.when('/about', {
 			templateUrl: 'templates/about.html'
 		})
