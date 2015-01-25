@@ -26,10 +26,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 @import "landing-page";
 @import "about";
-@import "registry";
 @import "footer";
 @import "events";
-
+@import "registry";
 
 // bootstrap overrides
 .main-view {
@@ -58,4 +57,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .navbar-default .btn-link {
 	line-height: 20px;
 	text-decoration:  none;
+}
+
+// other styles
+.centered-row {
+	text-align: center;
 }
