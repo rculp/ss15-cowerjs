@@ -4,7 +4,7 @@
 ==================================================================*/
 /*global angular*/
 
-var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase']);
+var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase', 'ui.select']);
 
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
@@ -27,7 +27,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 	// This is required for Browser Sync to work poperly
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }]);
-
 
 /*================================================================
 =>                  chipsOrSomething App Run()  
