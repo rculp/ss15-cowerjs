@@ -6,12 +6,14 @@
 
 		<div ng-show="!loading && selectedEvent" class="col-md-9">
                   <h1 class="page-header">{{selectedEvent.name}}</h1>
-                  <p>You are {{username}}.
-                  These are your events.</p>
-                  <div ng-repeat="e in events | orderBy:'start_time'">
-                        {{e.name}} on {{e.start_time | date:'EEEE, MMM d, yyyy on h:mm a'}}. You are {{e.rsvp_status}}.
-                        <button ng-click="chooseEvent()">Add</button>
-                  </div>
+                  <h4 class="sub-header">
+                        <i class="fa fa-clock-o"></i>
+                        {{selectedEvent.start_time | date:'EEEE, MMM d, yyyy on h:mm a'}}
+                  </h4>
+                  <h4 class="sub-header">
+                        <i class="fa fa-map-marker"></i>
+                        {{selectedEvent.location}}
+                  </h4>
 		</div>
             <div ng-show="!loading && !selectedEvent" class="col-md-9">
                   <h1 class="page-header">No upcoming events!</h1>
