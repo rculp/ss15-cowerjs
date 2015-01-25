@@ -74,8 +74,9 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 	this.getEvent = function(id) {
 		var firebasePromise = $q(
 			function (resolve, reject) {
-				Firebase.child('events/' + id).once('value', 
+				Firebase.child('events').orderByChild('id').equalTo(id).once('value', 
 					function (data) {
+						console.log(data.val());
 						resolve(data.val());
 					},
 					function (error) {

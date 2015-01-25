@@ -12,6 +12,8 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 	$scope.buttonMessage = 'Add event to Chips or Something';
 
 	$scope.loading = true;
+	$scope.eventOnlyOnFacebook = true;
+	$scope.amEventAdmin = false;
 
 	EventsService.getEvents().then(function(events) {
 		if (events.length > 0) {
@@ -32,29 +34,50 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 				$scope.selectedEvent = event;
 				$scope.loading = false;
 				$scope.selectedEvent = event;
-				var userId = _user.id;
-				var owner = $scope.selectedEvent.facebook.owner.id;
-				if(userId === owner){
-					$scope.buttonMessage = 'Add your event to Chips or Something';
-					$scope.organizer = 'You!';
-				}
-				else{
-					$scope.buttonMessage = 'Suggest using Chips or Something';
-					$scope.organizer = $scope.selectedEvent.facebook.owner.name;
-				}
+				initializeEvent();
 			});
 		} else {
 			$scope.selectedEvent = event;
+			initializeEvent();
 		}
-		
 	};
 
+	function initializeEvent() {
+		var userId = _user.id;
+		var owner = $scope.selectedEvent.facebook.owner.id;
+		if(userId === owner){
+			$scope.organizer = 'You!';
+		} else {
+			$scope.organizer = $scope.selectedEvent.facebook.owner.name;
+		}
+		$scope.amEventAdmin = amEventAdmin();
+		$scope.eventOnlyOnFacebook = eventOnlyOnFacebook();
+	}
+
 	$scope.addEvent = function(){
-			//upon user's permission push this data to the event service to add to firebase
-			var firebasePromise = EventsService.addToFireBase($scope.selectedEvent);
-			firebasePromise.then(function(){
-				$scope.dataAdded = true;
-			});
+		//upon user's permission push this data to the event service to add to firebase
+		var firebasePromise = EventsService.addToFireBase($scope.selectedEvent);
+		firebasePromise.then(function(){
+			$scope.dataAdded = true;
+		});
 	};
+
+	function eventOnlyOnFacebook() {
+		return $scope.selectedEvent == null || !$scope.selectedEvent.data;
+	};
+
+	function amEventAdmin() {
+		if ($scope.selectedEvent == null) {
+			return false;
+		}
+
+		if (eventOnlyOnFacebook()) {
+			var validFacebookData = $scope.selectedEvent.facebook;
+			var isOwner = $scope.selectedEvent.facebook.owner.id == UserService.getCurrentUser().id
+			return validFacebookData && isOwner;
+		}
+
+		return $scope.selectedEvent.data && $scope.selectedEvent.data.admins && $scope.selectedEvent.data.admins.indexOf(UserService.getCurrentUser().id) !== -1;
+	}
 
 }]);
