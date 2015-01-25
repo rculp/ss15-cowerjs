@@ -13,6 +13,7 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', function ($sc
 		$scope.selectedEvent = event;
 	};
 
+
 	var today = new Date();
 	var todayUnix = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime() / 1000;
     var nextweekUnix = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14).getTime() / 1000;

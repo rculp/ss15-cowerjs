@@ -17,7 +17,7 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookPro
 			templateUrl: 'templates/home.html',
 			controller: 'HomeCtrl'
 		})
-		.when('/registry', {
+		.when('/registry/:eventId', {
 			templateUrl: 'templates/registry.html',
 			controller: 'RegistryCtrl'
 		})

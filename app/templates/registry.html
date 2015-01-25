@@ -34,7 +34,7 @@
     		<h3>Food</h3>
     		<div ng-repeat="food in foods">
     			<div class='need'>
-    				<div><div ng-class="(food.isClaimed) ? 'needName claimed' : 'needName unclaimed'">{{food.name}}</div></div>
+    				<div><div ng-class="(food.isClaimed) ? 'needName unclaimed' : 'needName claimed'">{{food.name}}</div></div>
     				<div ng-hide="{{food.isClaimed}}" class="needClaimer">Claimed By: {{food.getClaimedBy()}}</div>
     				<div ng-show="{{food.isClaimed}}"><button class="btn btn-default claimBtn">Claim This!</button></div>
     			</div>

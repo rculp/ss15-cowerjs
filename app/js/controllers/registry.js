@@ -4,7 +4,7 @@
 ==================================================================*/
 /*global app*/
 
-app.controller('RegistryCtrl', ['$scope', function ($scope) {
+app.controller('RegistryCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
 
 	'use strict';
 
