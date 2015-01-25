@@ -10,7 +10,7 @@ app.directive('ngLoginButton', ['$rootScope', '$location', 'Firebase', function 
 
     function authenticate() {
     	Firebase.authWithOAuthPopup('facebook', authenticated, {
-    		scope: 'public_profile,user_friends,user_events,manage_notifications,email'
+    		scope: 'public_profile,user_friends,user_events,manage_notifications,email,user_groups'
     	});
     }
 
@@ -19,6 +19,7 @@ app.directive('ngLoginButton', ['$rootScope', '$location', 'Firebase', function 
 			console.log("Unauthenticated");
 		} else {
 			console.log("Authenticated");
+	    	$location.path('/events');
 		}
     }
 

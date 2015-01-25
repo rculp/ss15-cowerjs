@@ -10,6 +10,7 @@ app.directive('ngLogoutButton', ['$rootScope', '$location', 'Auth', function ($r
 
     function logout() {
     	Auth.$unauth();
+    	$location.path("/");
     }
 
 	return {
