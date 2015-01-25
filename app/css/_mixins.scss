@@ -1,0 +1,6 @@
+@mixin animation($element, $ease, $time){
+    -webkit-transition : $element $time $ease;
+    -moz-transition : $element $time $ease;
+    -o-transition : $element $time $ease;
+    transition : $element $time $ease;
+}

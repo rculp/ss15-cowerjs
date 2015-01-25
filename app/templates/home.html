@@ -15,7 +15,10 @@
 	                        	<i class="fa fa-facebook fa-fw"></i>
 	                        	<span class="network-name">Login With Facebook</span>
 	                    	</ng-login-button>
-                            <button ng-show-auth ng-click="goToEvents()" class="btn btn-default btn-lg">See Your Events</button>
+                            <a href="/#!/events" ng-show-auth class="btn btn-default btn-lg">
+                                <i class="fa fa-calendar-o fa-fw"></i>
+                                See Your Events
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -102,17 +105,20 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <h2>What are you bringing?</h2>
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <ul class="list-inline banner-social-buttons">
                     <li>
                         <ng-login-button ng-hide-auth class="btn btn-default btn-lg">
-                        	<i class="fa fa-facebook fa-fw"></i> 
+                        	<i class="fa fa-facebook fa-fw"></i>
                         	<span class="network-name">Login With Facebook</span>
                     	</ng-login-button>
-                        <button ng-show-auth class="btn btn-default btn-lg">See Your Events</button>
+                        <a href="/#!/events" ng-show-auth class="btn btn-default btn-lg">
+                            <i class="fa fa-calendar-o fa-fw"></i>
+                            See Your Events
+                        </a>
                     </li>
                 </ul>
             </div>

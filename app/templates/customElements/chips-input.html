@@ -1,7 +1,43 @@
 <link rel="import" href="../../vendor/polymer.html">
-<polymer-element name="chips-input" attributes="label hint" noscript>
+<polymer-element name="chips-input" attributes="label hint width">
     <template>
+        <style>
+            :host{
+                color: #444747;
+            }
+            input{
+                width: {{width}}%;
+                min-width: 200px;
+                outline: none !important;
+                padding: 3px;
+                color: #1F7F9C;
+                border: 1px solid #D6D6D6;
+                -webkit-transition : border 500ms ease-out;
+                -moz-transition : border 500ms ease-out;
+                -o-transition : border 500ms ease-out;
+                transition : border 500ms ease-out;
+                -webkit-transition : background-color 500ms ease-out;
+                -moz-transition : background-color 500ms ease-out;
+                -o-transition : background-color 500ms ease-out;
+                transition : background-color 500ms ease-out;
+                background-color: rgba(0,0,0,0.1);
+            }
+            input:hover{
+                border: 1px solid #1F7F9C;
+                background-color: rgba(255, 255, 255,1.0);
+            }
+            input::-moz-focus-inner {
+                border: 0;
+                padding: 0;
+            }
+            label{
+                font-weight: 500;
+            }
+        </style>
         <label>{{label}}:</label>
         <input type="text" placeholder="{{hint}}">
     </template>
+    <script>
+  Polymer({});
+  </script>
 </polymer-element>

@@ -1,3 +1,4 @@
+
 .need {
 	margin-bottom: 5px;
 	> * {
@@ -27,3 +28,33 @@
 	}
 }
 
+.chip-input{
+    width: 35%;
+    min-width: 120px;
+    outline: none !important;
+    padding: 3px 3px 3px 10px;
+    color: $brand-blue;
+    border: 1px solid $input-border-color;
+    @include animation(border 500ms ease-out);
+    @include animation(background-color 500ms ease-out);
+    background-color: rgba(0,0,0,0.1);
+    font-weight: normal !important;
+    padding-left: 7px;
+    margin-left: 5px;
+    &:hover{
+        border: 1px solid $input-border-color-hover;
+        background-color: rgba(255, 255, 255,1.0);
+    }
+    &:active{
+        border: 1px solid $input-border-color-hover;
+        background-color: rgba(255, 255, 255,1.0);
+    }
+     &:focus{
+        border: 1px solid $input-border-color-hover;
+        background-color: rgba(255, 255, 255,1.0);
+    }
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}

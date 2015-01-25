@@ -110,14 +110,7 @@
     margin-top: 0;
 }
 
-@media(max-width:1199px) {
-    ul.banner-social-buttons {
-        float: left;
-        margin-top: 15px;
-    }
-}
-
-@media(max-width:767px) {
+@media(max-width:991px) {
     .banner h2 {
         margin: 0;
         text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
@@ -133,13 +126,14 @@
     ul.banner-social-buttons > li:last-child {
         margin-bottom: 0;
     }
-}
 
-footer {
-    padding: 50px 0;
-    background-color: #f8f8f8;
-}
+    .banner {
+        text-align: center;
+    }
 
-p.copyright {
-    margin: 15px 0 0;
+    ul.banner-social-buttons {
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+    }
 }
