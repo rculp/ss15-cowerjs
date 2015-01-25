@@ -4,11 +4,10 @@
 ==================================================================*/
 /*global app*/
 
-app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService', '$q',  function ($rootScope, Firebase, Facebook, UserService, $q) {
+app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService', '$q', 'orderByFilter', function ($rootScope, Firebase, Facebook, UserService, $q, orderByFilter) {
 
 	'use strict';
 
-	var events = [];
 	var user = UserService.getCurrentUser();
 
 	function getFacebookData() {
@@ -20,49 +19,41 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 			'/' + user.id + '/events/attending', 
 			{ access_token: user.accessToken, since: todayUnix, until: nextweekUnix }, 
 			function (response) {
-				events = response.data;
+				return response;
 			}
 		);
-	}
-
-	function getExtraData() {
-		var promises = [];
-		events.forEach(function (event) {
-			var firebasePromise = $q(
-				function (resolve, reject) {
-					Firebase.child('events/' + event.id).once('value', 
-						function (data) {
-							event.data = data.val();
-							resolve();
-						},
-						function (error) {
-							reject();
-						}
-					);
-				}
-			);
-			var facebookPromise = Facebook.api(
-				'/' + event.id,
-				{ access_token: user.accessToken },
-				function (response) {
-					event.facebook = response;
-				}
-			);
-			promises.push(firebasePromise);
-			promises.push(facebookPromise);
-		});
-		return $q.all(promises);
 	}
 
 	this.getEvents = function() {
 		return $q(function (resolve, reject) {
 			getFacebookData()
-			.then(getExtraData)
-			.then(function () { 
-				console.log(events);
-				resolve(events);
+			.then(function (response) { 
+				resolve(orderByFilter(response.data, 'start_time'));
 			});
 		});
+	}
+
+	this.getEvent = function(id) {
+		var firebasePromise = $q(
+			function (resolve, reject) {
+				Firebase.child('events/' + id).once('value', 
+					function (data) {
+						resolve(data.val());
+					},
+					function (error) {
+						reject();
+					}
+				);
+			}
+		);
+		var facebookPromise = Facebook.api(
+			'/' + id,
+			{ access_token: user.accessToken },
+			function (response) {
+				return response;
+			}
+		);
+		return $q.all({ data: firebasePromise, facebook: facebookPromise });
 	}
 
 }]);
