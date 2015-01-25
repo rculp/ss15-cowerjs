@@ -1,6 +1,7 @@
 node_modules/
 .sass-cache
-.divshot-cache
+.divshot-cache/
+build/
 .DS_Store
 npm-debug.log
 zip/
