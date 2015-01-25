@@ -19,11 +19,14 @@
 */
 
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/" !default;
+@import "variables";
+@import "mixins";
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 
 @import "landing-page";
 @import "about";
+@import "registry";
 
 // bootstrap overrides
 .page-header {
