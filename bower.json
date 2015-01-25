@@ -15,5 +15,6 @@
     "angular-mocks": "*",
     "angular-scenario": "*"
   },
-  "overrides": {}
+  "overrides": {
+  }
 }
