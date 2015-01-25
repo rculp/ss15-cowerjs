@@ -4,7 +4,7 @@
 	<!-- Header Row -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Chip Registry for <span>{{getEventName()}}</span></h1>
+                <h1 class="page-header">Chip Registry for <span>{{event.name}}</span></h1>
             </div>
         </div>
 
@@ -12,41 +12,42 @@
 		<div class="row centered-row">
 			<div class="col-sm-4 col-xs-12">
 				<h3>Host</h3>
-				<div>{{host}}</div>
+				<div>{{event.owner.name}}</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
 				<h3>Admins</h3>
-				<div ng-repeat="admin in admins">
-					{{admin}}
+				<div ng-repeat="admin in event.admins">
+					{{admin.name}}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
 				<h3>Guests</h3>
 				<div ng-repeat="guest in guests">
-					{{guest}}
+					{{guest.name}}
 				</div>
 			</div>
 		</div>
 
 	<!-- Needs Row -->
     <div class="row centered-row">
-    	<div class="col-sm-6 col-xs-12">
-    		<h3>Food</h3>
-    		<div ng-repeat="food in foods">
+        <div class="col-lg-12">
+            <h3>Suggest Items</h3>
+            <ui-select multiple tagging search-enabled="false" tagging-label="(custom 'new' label)" ng-model="suggestions">
+                <ui-select-match placeholder="Suggest what to bring!">{{$item}}</ui-select-match>
+                <ui-select-choices repeat="suggestion in suggestions | filter:$select.search">
+                    {{color}}
+                </ui-select-choices>
+            </ui-select>
+            <br>
+            <button class="btn btn-default" ng-click="suggest()">Add Suggestions</button>
+        </div>
+    	<div class="col-lg-12">
+            <h3>Needs</h3>
+    		<div ng-repeat="need in event.needs">
     			<div class='need'>
-    				<div><div ng-class="(food.isClaimed) ? 'needName claimed' : 'needName unclaimed'">{{food.name}}</div></div>
-    				<div ng-show="{{food.isClaimed}}" class="needClaimer">Claimed By: {{food.claimerName}}</div>
-    				<div ng-hide="{{food.isClaimed}}"><button  ng-click="claimItem(food)"class="btn btn-default claimBtn">Claim This!</button></div>
-    			</div>
-    		</div>
-    	</div>
-    	<div class="col-sm-6 col-xs-12">
-    		<h3>Drink</h3>
-    		<div ng-repeat="drink in drinks">
-    			<div class='need'>
-    				<div><div ng-class="(drink.isClaimed) ? 'needName claimed' : 'needName unclaimed'">{{drink.name}}</div></div>
-    				<div ng-show="{{drink.isClaimed}}"  class="needClaimer">Claimed By: {{drink.claimerName}}</div>
-    				<div ng-hide="{{drink.isClaimed}}"><button ng-show="{{drink.isClaimed}}" ng-click="claimItem(drink)" class="btn btn-default claimBtn">Claim This!</button></div>
+    				<div><div ng-class="(need.taken) ? 'needName claimed' : 'needName unclaimed'">{{need.name}}</div></div>
+    				<div ng-show="{{need.taken}}" class="needClaimer">Claimed By: {{getClaimerName(need)}}</div>
+    				<div ng-hide="{{need.taken}}"><button  ng-click="claimItem(need)"class="btn btn-default claimBtn">Claim This!</button></div>
     			</div>
     		</div>
     	</div>
@@ -55,7 +56,7 @@
     <!-- Progress Row -->
     <div class="row centered-row">
         <div class="col-lg-12">
-            <button ng-class="(allClaimed()) ? '' : 'disabled'"ng-click="finalizeList()" class="btn btn-default btn-lg">Finalize List</button>
+            <button ng-click="publishList()" class="btn btn-default btn-lg">Publish List</button>
         </div>
     </div>
 </div>
