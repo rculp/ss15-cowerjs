@@ -31,6 +31,44 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 				resolve(orderByFilter(response.data, 'start_time'));
 			});
 		});
+	};
+
+	this.addToFireBase = function(event){
+		var newEvent = createEventObject(event);
+		var firebasePromise = $q(function(resolve, reject){
+			Firebase.child('events/').push(newEvent, function(data){
+				resolve(data.val());
+			}, function(){
+				reject();
+			});
+		});
+		return firebasePromise;
+		
+	};
+
+	function createEventObject(event){
+		var eventId = event.id;
+		var fbEvent = {
+			'id': eventId,
+			'admins': [],
+			'attendees' : [],
+			'location' : {
+				'name' : event.location,
+				'address1': event.facebook.venue.street,
+				'city': event.facebook.venue.city,
+				'country': event.facebook.venue.country,
+				'zip': event.facebook.venue.zip,
+				'state': event.facebook.venue.state
+			},
+			'needs': [],
+			'owner' : {
+				'name': event.facebook.owner.name,
+				'id': event.facebook.owner.id
+			},
+			'name' : event.name,
+			'time' : event.start_time
+		};
+		return fbEvent;
 	}
 
 	this.getEvent = function(id) {

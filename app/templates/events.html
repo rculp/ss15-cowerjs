@@ -14,13 +14,31 @@
                         <i class="fa fa-map-marker fa-fw"></i>
                         {{selectedEvent.location}}
                   </h4>
-                  <a href="/#!/registry/{{selectedEvent.id}}" class="btn btn-default btn-lg">View Event</a>
+
+                  <h4 class="sub-header">
+                        <i class="fa fa-user fa-fw"></i>
+                        Organized by {{organizer}}
+                  </h4>
+
+                  <div class="data-needed-container" ng-hide="selectedEvent.data">
+                        <h3>Not in database</h3>
+                        Dudebro ur not in the data!! <button class="btn btn-default" ng-click="addEvent()">{{buttonMessage}}</button>
+                  </div>
+                  <div ng-show="selectedEvent.data">
+                        <a href="/#!/registry/{{selectedEvent.id}}" class="btn btn-default btn-lg">View Event</a>
+                  </div>
+
 		</div>
-            <div ng-show="!loading && !selectedEvent" class="col-md-9">
+            <div ng-show="!loading && !selectedEvent && !events" class="col-md-9">
                   <h1 class="page-header">No upcoming events!</h1>
+            </div>
+            <div ng-show="!loading && !selectedEvent" class="col-md-9">
+                  <h1 class="page-header">Please select an event</h1>
             </div>
             <div ng-show="loading" class="col-md-9">
                   <h1 class="page-header">Loading...</h1>
             </div>
+
 	</div>
+      
 </div>

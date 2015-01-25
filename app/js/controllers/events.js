@@ -2,6 +2,15 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 	'use strict';
 
 	$scope.selectedEvent = null;
+
+	var _user = UserService.getCurrentUser();
+
+	$scope.organizer = '???';
+
+	$scope.dataAdded = false;
+
+	$scope.buttonMessage = 'Add event to Chips or Something';
+
 	$scope.loading = true;
 
 	EventsService.getEvents().then(function(events) {
@@ -22,10 +31,30 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 				event.dataLoaded = true;
 				$scope.selectedEvent = event;
 				$scope.loading = false;
+				$scope.selectedEvent = event;
+				var userId = _user.id;
+				var owner = $scope.selectedEvent.facebook.owner.id;
+				if(userId === owner){
+					$scope.buttonMessage = 'Add your event to Chips or Something';
+					$scope.organizer = 'You!';
+				}
+				else{
+					$scope.buttonMessage = 'Suggest using Chips or Something';
+					$scope.organizer = $scope.selectedEvent.facebook.owner.name;
+				}
 			});
 		} else {
 			$scope.selectedEvent = event;
 		}
+		
+	};
+
+	$scope.addEvent = function(){
+			//upon user's permission push this data to the event service to add to firebase
+			var firebasePromise = EventsService.addToFireBase($scope.selectedEvent);
+			firebasePromise.then(function(){
+				$scope.dataAdded = true;
+			});
 	};
 
 }]);
