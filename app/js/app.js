@@ -4,7 +4,9 @@
 ==================================================================*/
 /*global angular*/
 
-var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase', 'facebook']);
+
+var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase', 'ui.select', 'facebook']);
+
 
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', function ($routeProvider, $locationProvider, $httpProvider, FacebookProvider) {
@@ -33,7 +35,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookPro
 	// This is required for Browser Sync to work poperly
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }]);
-
 
 /*================================================================
 =>                  chipsOrSomething App Run()  
