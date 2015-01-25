@@ -36,10 +36,12 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 	this.addToFireBase = function(event){
 		var newEvent = createEventObject(event);
 		var firebasePromise = $q(function(resolve, reject){
-			Firebase.child('events/').push(newEvent, function(data){
-				resolve(data.val());
-			}, function(){
-				reject();
+			Firebase.child('events/').push(newEvent, function(error) {
+				if (error) {
+					reject();
+				} else {
+					resolve(newEvent);
+				}
 			});
 		});
 		return firebasePromise;
@@ -54,11 +56,11 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 			'attendees' : [],
 			'location' : {
 				'name' : event.location,
-				'address1': event.facebook.venue.street,
-				'city': event.facebook.venue.city,
-				'country': event.facebook.venue.country,
-				'zip': event.facebook.venue.zip,
-				'state': event.facebook.venue.state
+				// 'address1': event.facebook.venue.street,
+				// 'city': event.facebook.venue.city,
+				// 'country': event.facebook.venue.country,
+				// 'zip': event.facebook.venue.zip,
+				// 'state': event.facebook.venue.state
 			},
 			'needs': [],
 			'owner' : {
@@ -76,7 +78,6 @@ app.service('EventsService', ['$rootScope', 'Firebase', 'Facebook', 'UserService
 			function (resolve, reject) {
 				Firebase.child('events').orderByChild('id').equalTo(id).once('value', 
 					function (data) {
-						console.log(data.val());
 						resolve(data.val());
 					},
 					function (error) {

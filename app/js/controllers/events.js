@@ -1,16 +1,11 @@
-app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsService', function ($scope, UserService, Facebook, EventsService) {
+app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsService', '$location', function ($scope, UserService, Facebook, EventsService, $location) {
 	'use strict';
-
-	$scope.selectedEvent = null;
 
 	var _user = UserService.getCurrentUser();
 
+	$scope.selectedEvent = null;
 	$scope.organizer = '???';
-
-	$scope.dataAdded = false;
-
-	$scope.buttonMessage = 'Add event to Chips or Something';
-
+	$scope.dataSaving = false;
 	$scope.loading = true;
 	$scope.eventOnlyOnFacebook = true;
 	$scope.amEventAdmin = false;
@@ -19,9 +14,10 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 		if (events.length > 0) {
 			var event = events[0];
 			$scope.chooseEvent(event);
+		} else {
+			$scope.loading = false;
 		}
 		$scope.events = events;
-		$scope.loading = false;
 	});
 
 	$scope.chooseEvent = function(event) {
@@ -54,11 +50,11 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 		$scope.eventOnlyOnFacebook = eventOnlyOnFacebook();
 	}
 
-	$scope.addEvent = function(){
+	$scope.addEvent = function() {
 		//upon user's permission push this data to the event service to add to firebase
 		var firebasePromise = EventsService.addToFireBase($scope.selectedEvent);
-		firebasePromise.then(function(){
-			$scope.dataAdded = true;
+		firebasePromise.then(function(event){
+			$location.path('/registry/' + event.id);
 		});
 	};
 
