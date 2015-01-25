@@ -10,6 +10,7 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', 'EventsServic
 			$scope.chooseEvent(event);
 		}
 		$scope.events = events;
+		$scope.loading = false;
 	});
 
 	$scope.chooseEvent = function(event) {
