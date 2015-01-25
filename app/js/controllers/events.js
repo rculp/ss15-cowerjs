@@ -4,12 +4,10 @@ app.controller('EventsCtrl', ['$scope','UserService', 'Facebook', function ($sco
 
 	$scope.username = _user.displayName;
 
-	$scope.events = function() {
-		Facebook.api('/' + _user.id + '', { access_token: _user.accessToken }, function (response) {
-			console.log(response);
-			return response;
-		});
-	};
-
+	Facebook.api('/' + _user.id + '/events/attending', { access_token: _user.accessToken }, 
+	function (response) {
+		$scope.events = response.data;
+		return response.data;
+	});
 	
 }]);

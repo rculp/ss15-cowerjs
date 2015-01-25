@@ -2,8 +2,11 @@
 	<div class="row">
 		<div class="col-lg-12">
             <h1 class="page-header">My Events</h1>
-            You are {{username}}.
-            <button ng-click="events()">click</button>
+            <p>You are {{username}}.
+            These are your events.</p>
+            <div ng-repeat="e in events | orderBy:'start_time'">
+            {{e.name}} on {{e.start_time | date:'EEEE, MMM d, yyyy on h:mm a'}}. You are {{e.rsvp_status}}.
+            </div>
 		</div>
 	</div>
 </div>
