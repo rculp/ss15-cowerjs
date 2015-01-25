@@ -1,0 +1,18 @@
+<ui-select multiple tagging search-enabled=false tagging-label="(custom 'new' label)" ng-model="colors.selected">
+            <ui-select-match placeholder="Select colors...">{{$item}}</ui-select-match>
+            <ui-select-choices repeat="color in colors | filter:$select.search">
+                {{color}}
+            </ui-select-choices>
+        </ui-select>
+    <button ng-click="checkColors()">See Colors</button>
+
+        <script>
+        //example only
+        $scope.colors = ['Red', 'Green', 'Blue', 'Sepia', 'Mauve'];
+    $scope.colors.selected = ['Yellow']; 
+    //If there is preloaded selected value that is not in the base collection above, it will NOT show up. That means we need to save all new options upon publish of an event.
+
+    $scope.checkColors = function checkColors(){
+        console.log($scope.colors.selected);
+    }
+        </script> 

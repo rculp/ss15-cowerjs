@@ -26,6 +26,8 @@ var	SETTINGS = {
 		templates: 'app/templates/',
 		images: 'app/img/',
 		fonts: 'app/fonts/',
+		vendor: 'app/vendor/',
+		bootstrap: 'app/bootstrap/',
 		bower: 'bower_components/'
 	},
 	build: {
@@ -35,6 +37,8 @@ var	SETTINGS = {
 		templates: 'build/templates/',
 		images: 'build/img/',
 		fonts: 'build/fonts/',
+		vendor: 'build/vendor/',
+		bootstrap: 'build/bootstrap/',
 		bower: 'build/bower/' // If you change this, you will have to change in index.html as well.
 	},
 	scss: 'scss/'
@@ -197,7 +201,7 @@ gulp.task('image:min', function () {
 =                           Copy                            =
 ============================================================*/
 
-gulp.task('copy', ['copy:html', 'copy:images', 'copy:fonts', 'copy:html:root']);
+gulp.task('copy', ['copy:html', 'copy:images', 'copy:fonts', 'copy:html:root', 'copy:vendor', 'copy:bootstrap']);
 
 
 gulp.task('copy:html', function () {
@@ -232,6 +236,19 @@ gulp.task('copy:fonts', function () {
 		.pipe(gulp.dest(SETTINGS.build.fonts));
 });
 
+gulp.task('copy:vendor', function () {
+
+	console.log('-------------------------------------------------- COPY :vendor');
+	gulp.src([SETTINGS.src.vendor + '*', SETTINGS.src.vendor + '**/*'])
+		.pipe(gulp.dest(SETTINGS.build.vendor));
+});
+
+gulp.task('copy:bootstrap', function () {
+
+	console.log('-------------------------------------------------- COPY :bootstrap');
+	gulp.src([SETTINGS.src.bootstrap + '*', SETTINGS.src.bootstrap + '**/*'])
+		.pipe(gulp.dest(SETTINGS.build.bootstrap));
+});
 
 /*=========================================================================================================
 =												Watch
@@ -345,19 +362,19 @@ gulp.task('zip', function () {
 
 gulp.task('build', function () {
 	console.log(hintLog('-------------------------------------------------- BUILD - Development Mode'));
-	runSequence('copy', 'concat', 'watch');
+	runSequence('copy', 'concat');
 });
 
 gulp.task('build:prod', function () {
 	console.log(hintLog('-------------------------------------------------- BUILD - Production Mode'));
 	isProduction = true;
-	runSequence('copy', 'concat', 'watch');
+	runSequence('copy', 'concat');
 });
 
-gulp.task('default', ['build', 'server']);
+gulp.task('default', ['build', 'watch', 'server']);
 
 // Just in case you are too lazy to type: $ gulp --type production
-gulp.task('prod', ['build:prod', 'server']);
+gulp.task('prod', ['build:prod', 'watch', 'server']);
 
 
 

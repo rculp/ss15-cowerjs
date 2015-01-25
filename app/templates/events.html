@@ -1,0 +1,39 @@
+<div class="container">
+      <div class="row">
+            <div class="col-md-3">
+                  <ng-include src="'templates/events/sidebar.html'"></ng-include>
+            </div>
+
+		<div ng-show="!loading && selectedEvent" class="col-md-9">
+                  <h1 class="page-header">{{selectedEvent.name}}</h1>
+                  <h4 class="sub-header">
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        {{selectedEvent.start_time | date:'EEEE, MMM d, yyyy @ h:mm a'}}
+                  </h4>
+                  <h4 class="sub-header">
+                        <i class="fa fa-map-marker fa-fw"></i>
+                        {{selectedEvent.location}}
+                  </h4>
+                  <h4 class="sub-header">
+                        <i class="fa fa-user fa-fw"></i>
+                        Organized by {{organizer}}
+                  </h4>
+
+                  <ng-include ng-show="eventOnlyOnFacebook && amEventAdmin" src="'templates/events/create.html'"></ng-include>
+                  <ng-include ng-show="!eventOnlyOnFacebook && amEventAdmin" src="'templates/events/admin.html'"></ng-include>
+                  <ng-include ng-show="eventOnlyOnFacebook && !amEventAdmin" src="'templates/events/request.html'"></ng-include>
+                  <ng-include ng-show="!eventOnlyOnFacebook && !amEventAdmin" src="'templates/events/display.html'"></ng-include>
+		</div>
+            <div ng-show="!loading && !selectedEvent && !events" class="col-md-9">
+                  <h1 class="page-header">No upcoming events!</h1>
+            </div>
+            <div ng-show="!loading && !selectedEvent" class="col-md-9">
+                  <h1 class="page-header">Please select an event</h1>
+            </div>
+            <div ng-show="loading" class="col-md-9">
+                  <h1 class="page-header">Loading...</h1>
+            </div>
+
+	</div>
+      
+</div>

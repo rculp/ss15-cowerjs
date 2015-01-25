@@ -19,6 +19,47 @@
 */
 
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/" !default;
+@import "variables";
+@import "mixins";
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "../../bower_components/font-awesome/scss/font-awesome.scss";
 
+@import "landing-page";
+@import "about";
+@import "footer";
+@import "events";
+@import "registry";
 
+// bootstrap overrides
+.main-view {
+	padding-top: 60px;
+}
+
+.navbar-brand {
+	height: 60px;
+ 	> img {
+		display: inline-block;
+		margin-right: 10px;
+		height: 30px;
+	}
+}
+
+.navbar-toggle, .navbar-btn {
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+
+.navbar-nav > li > a {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.navbar-default .btn-link {
+	line-height: 20px;
+	text-decoration:  none;
+}
+
+// other styles
+.centered-row {
+	text-align: center;
+}
