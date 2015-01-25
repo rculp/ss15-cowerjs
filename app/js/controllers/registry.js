@@ -4,11 +4,15 @@
 ==================================================================*/
 /*global app*/
 
-app.controller('RegistryCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+app.controller('RegistryCtrl', ['$scope', '$routeParams', 'UserService', 'FbPostService', 'Facebook', function ($scope, $routeParams, UserService, FbPostService, Facebook) {
 
 	'use strict';
 
 	console.log('Controller ===  RegistryCtrl');
+
+	var _user = UserService.getCurrentUser();
+
+	var _eventId = $routeParams.eventId;
 
 	var event = {
 		'name' : 'The Big Game',
@@ -99,24 +103,24 @@ app.controller('RegistryCtrl', ['$scope', '$routeParams', function ($scope, $rou
 	$scope.foods = [];
 
 	angular.forEach(event.needs.food, function(i) {
-		var isClaimed = (i.claimedBy === null);
+		var isClaimed = (i.claimedBy !== null);
+		var claimerName;
+		if (event.owner.id === i.claimedBy) {
+			claimerName = event.owner.name;
+		} else {
+			var name;
+			angular.forEach(event.attendees, function(a) {
+				if (a.id === i.claimedBy) {
+					name = a.name;
+				}
+			});
+			claimerName = name;
+		}
 		var foodObj = {
 			'name': i.name,
 			'claimedBy': i.claimedBy,
 			'isClaimed': isClaimed,
-			'getClaimedBy': function() {
-				if (event.owner.id === i.claimedBy) {
-					return event.owner.name;
-				} else {
-					var name;
-					angular.forEach(event.attendees, function(a) {
-						if (a.id === i.claimedBy) {
-							name = a.name;
-						}
-					});
-					return name;
-				}
-			}
+			'claimerName': claimerName
 		};
 		$scope.foods.push(foodObj);
 	});
@@ -124,27 +128,55 @@ app.controller('RegistryCtrl', ['$scope', '$routeParams', function ($scope, $rou
 	$scope.drinks = [];
 
 	angular.forEach(event.needs.drink, function(i) {
-		var isClaimed = (i.claimedBy === null);
+		var isClaimed = (i.claimedBy !== null);
+		var claimerName;
+		if (event.owner.id === i.claimedBy) {
+			claimerName = event.owner.name;
+		} else {
+			var name;
+			angular.forEach(event.attendees, function(a) {
+				if (a.id === i.claimedBy) {
+					name = a.name;
+				}
+			});
+			claimerName = name;
+		}
+
 		var drinkObj = {
 			'name': i.name,
 			'claimedBy': i.claimedBy,
 			'isClaimed': isClaimed,
-			'getClaimedBy': function() {
-				if (event.owner.id === i.claimedBy) {
-					return event.owner.name;
-				} else {
-					var name;
-					angular.forEach(event.attendees, function(a) {
-						if (a.id === i.claimedBy) {
-							name = a.name;
-						}
-					});
-					return name;
-				}
-			}
+			'claimerName': claimerName
 		};
 		$scope.drinks.push(drinkObj);
 	});
+
+	$scope.claimItem = function (item) {
+		item.claimedBy = 1;
+		item.isClaimed = true;
+		item.claimerName = _user.displayName;
+	}
+
+	function checkClaimed (need) {
+		return need.isClaimed;
+	}
+
+	$scope.allClaimed = function () {
+		return ($scope.foods.every(checkClaimed) && $scope.drinks.every(checkClaimed));
+	}
+
+	$scope.finalizeList = function() {
+		var list = 'Food List\n------------\n';
+		angular.forEach($scope.foods, function(f) {
+			list += f.claimerName + ' is bringing ' + f.name + '\n';
+		});
+		list += '\nDrink List\n------------\n';
+		angular.forEach($scope.drinks, function(d) {
+			list += d.claimerName + ' is bringing ' + d.name + '\n';
+		});
+		FbPostService.postMessage(_user.accessToken, _eventId, list);
+	}
+
 }]);
 
 

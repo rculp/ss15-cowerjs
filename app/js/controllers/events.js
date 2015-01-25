@@ -27,5 +27,5 @@ app.controller('EventsCtrl', ['$scope', 'UserService', 'Facebook', function ($sc
 		}
 		return response.data;
 	});
-	
+
 }]);
