@@ -1,0 +1,46 @@
+/* Side Navigation */
+
+@media(min-width:768px) {
+    .side-nav {
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+
+    .side-nav>li>button {
+        width: 225px;
+        padding: 20px 0 20px 10px;
+        text-align: left;
+        i {
+            vertical-align: middle;
+        }
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            overflow: hidden;
+            width: 195px;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .side-nav li button:hover,
+    .side-nav li button:focus {
+        outline: none;
+        background-color: #eeeeee;
+    }
+}
+
+.side-nav>li>ul {
+    padding: 0;
+}
+
+.side-nav>li>ul>li>button {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    color: #999;
+}
+
+.side-nav>li>ul>li>button:hover {
+    color: #fff;
+}
