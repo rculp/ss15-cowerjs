@@ -4,11 +4,15 @@
 ==================================================================*/
 /*global angular*/
 
-var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase', 'ui.select']);
+
+var app = angular.module('chipsOrSomething', ['ngRoute', 'ngAnimate', 'firebase', 'ui.select', 'facebook']);
 
 
-app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+
+app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', function ($routeProvider, $locationProvider, $httpProvider, FacebookProvider) {
 	'use strict';
+
+	FacebookProvider.init('655413814581170');
 
 	$routeProvider
 		.when('/home', {
@@ -17,6 +21,10 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
 		})
 		.when('/about', {
 			templateUrl: 'templates/about.html'
+		})
+		.when('/events', {
+			templateUrl: 'templates/events.html',
+			controller: 'EventsCtrl'
 		})
 		.otherwise({
 			redirectTo: '/home'
